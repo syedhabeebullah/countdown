@@ -5,369 +5,148 @@
   <title>Soheil ❤ Wafiya | Wedding Countdown</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      min-height:100vh;
+      font-family:Poppins,sans-serif;
+      color:#2a2335;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:radial-gradient(circle at top,#ffe6f2,#fef6ff 35%,#e3f2ff 70%,#f8fff9);
+      overflow:hidden;
+      position:relative;
     }
 
-    body {
-      min-height: 100vh;
-      font-family: "Poppins", sans-serif;
-      color: #2a2335;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: radial-gradient(circle at top, #ffe6f2, #fef6ff 35%, #e3f2ff 70%, #f8fff9);
-      overflow: hidden;
-      position: relative;
+    /* BG effect */
+    body::before,body::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      filter:blur(40px);
+      opacity:.6;
+      z-index:0;
+      animation:floatBg 18s ease-in-out infinite alternate;
+    }
+    body::before{width:380px;height:380px;background:#ffb3c6;top:-80px;left:-60px;}
+    body::after{width:420px;height:420px;background:#b3e6ff;bottom:-120px;right:-40px;animation-delay:3s;}
+
+    @keyframes floatBg{from{transform:translate3d(0,0,0);}to{transform:translate3d(25px,-30px,0);}}
+
+    /* Hearts */
+    .floating-hearts{
+      position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+    }
+    .floating-hearts span{
+      position:absolute;bottom:-40px;font-size:1.4rem;
+      color:rgba(255,120,156,.7);
+      animation:riseHeart linear infinite;
+    }
+    @keyframes riseHeart{
+      0%{transform:translate3d(0,0,0) scale(.8);opacity:0;}
+      10%{opacity:1;}
+      100%{transform:translate3d(var(--x-move,0px),-120vh,0) scale(1.2);opacity:0;}
     }
 
-    /* Floating background circles */
-    body::before,
-    body::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.6;
-      z-index: 0;
-      animation: floatBg 18s ease-in-out infinite alternate;
+    /* Container */
+    .container{
+      position:relative;z-index:1;width:100%;max-width:960px;
+      background:rgba(255,255,255,.9);border-radius:28px;
+      padding:32px 22px 36px;box-shadow:0 22px 40px rgba(0,0,0,.12);
+      backdrop-filter:blur(16px);
     }
 
-    body::before {
-      width: 380px;
-      height: 380px;
-      background: #ffb3c6;
-      top: -80px;
-      left: -60px;
+    header{text-align:center;margin-bottom:18px;}
+    .header-tagline{text-transform:uppercase;font-size:.78rem;letter-spacing:.22em;color:#b19ac1;margin-bottom:6px;}
+    .names-line{font-family:"Great Vibes";font-size:3.2rem;color:#e2578c;display:flex;justify-content:center;gap:10px;}
+    .and-heart{animation:pulseHeart 1.8s ease-in-out infinite;font-size:1.7rem;color:#ff769c;}
+    @keyframes pulseHeart{0%,100%{transform:scale(1);}40%{transform:scale(1.17);}70%{transform:scale(.96);}}
+    .nikah-line{color:#7b6a8e;font-size:.94rem;margin-top:8px;}
+
+    .date-pill{
+      display:inline-flex;gap:8px;padding:8px 18px;margin-top:18px;
+      background:linear-gradient(120deg,#ffe1eb,#ffe6ff);
+      border-radius:999px;font-size:.9rem;color:#795474;
+    }
+    .date-pill-dot{width:5px;height:5px;border-radius:50%;background:#ff95b5;}
+
+    /* Countdown */
+    .content{display:grid;gap:24px;}
+    @media(min-width:768px){.content{grid-template-columns:1.3fr 1fr;}}
+
+    .countdown-card{
+      background:linear-gradient(150deg,#fff,#fff4fa);
+      padding:20px;border-radius:22px;box-shadow:0 10px 26px rgba(255,143,178,.18);
+      position:relative;
     }
 
-    body::after {
-      width: 420px;
-      height: 420px;
-      background: #b3e6ff;
-      bottom: -120px;
-      right: -40px;
-      animation-delay: 3s;
+    .countdown-title{
+      font-family:"Playfair Display";font-size:1.18rem;color:#493350;margin-bottom:10px;
     }
 
-    @keyframes floatBg {
-      from { transform: translate3d(0, 0, 0); }
-      to   { transform: translate3d(25px, -30px, 0); }
-    }
+    .countdown-subtitle{color:#8a7299;font-size:.9rem;margin-bottom:18px;}
 
-    /* Floating hearts overlay */
-    .floating-hearts {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
+    .countdown-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+    @media(min-width:600px){.countdown-grid{grid-template-columns:repeat(4,1fr);}}
 
-    .floating-hearts span {
-      position: absolute;
-      bottom: -40px;
-      font-size: 1.4rem;
-      color: rgba(255, 120, 156, 0.7);
-      animation-name: riseHeart;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
+    .time-box{
+      background:radial-gradient(circle at top,#ffe7f2,#ffffff);
+      padding:12px;border-radius:18px;text-align:center;
     }
-
-    @keyframes riseHeart {
-      0% {
-        transform: translate3d(0, 0, 0) scale(0.8);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      100% {
-        transform: translate3d(var(--x-move, 0px), -120vh, 0) scale(1.2);
-        opacity: 0;
-      }
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 960px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 28px;
-      padding: 32px 22px 36px;
-      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.12);
-      backdrop-filter: blur(16px);
-      overflow: hidden;
-    }
-
-    .container::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: 1px solid rgba(255, 182, 193, 0.6);
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    header {
-      padding-bottom: 18px;
-      margin-bottom: 18px;
-    }
-
-    .header-tagline {
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 0.78rem;
-      color: #b19ac1;
-      text-align: center;
-      margin-bottom: 6px;
-    }
-
-    .names-line {
-      font-family: "Great Vibes", cursive;
-      font-size: 3.2rem;
-      text-align: center;
-      color: #e2578c;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .and-heart {
-      font-size: 1.7rem;
-      color: #ff769c;
-      animation: pulseHeart 1.8s ease-in-out infinite;
-    }
-
-    @keyframes pulseHeart {
-      0%, 100% { transform: scale(1); }
-      40%      { transform: scale(1.17); }
-      70%      { transform: scale(0.96); }
-    }
-
-    .nikah-line {
-      text-align: center;
-      color: #7b6a8e;
-      font-size: 0.94rem;
-      margin-top: 8px;
-    }
-
-    .date-pill {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 18px;
-      margin: 18px auto 0;
-      background: linear-gradient(120deg, #ffe1eb, #ffe6ff);
-      border-radius: 999px;
-      font-size: 0.9rem;
-      color: #795474;
-    }
-
-    .date-pill-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #ff95b5;
-    }
-
-    .content {
-      display: grid;
-      gap: 24px;
-    }
-
-    @media (min-width: 768px) {
-      .content {
-        grid-template-columns: 1.3fr 1fr;
-      }
-    }
-
-    /* Countdown Card */
-    .countdown-card {
-      padding: 20px;
-      background: linear-gradient(150deg, #ffffff, #fff4fa);
-      border-radius: 22px;
-      box-shadow: 0 10px 26px rgba(255, 143, 178, 0.18);
-      position: relative;
-    }
-
-    .countdown-card::before {
-      content: "24·12·25";
-      position: absolute;
-      bottom: -10px;
-      right: -4px;
-      font-size: 3.1rem;
-      font-family: "Playfair Display", serif;
-      color: rgba(255, 199, 220, 0.28);
-      transform: rotate(-12deg);
-    }
-
-    .countdown-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.18rem;
-      margin-bottom: 10px;
-      color: #493350;
-    }
-
-    .countdown-subtitle {
-      font-size: 0.9rem;
-      color: #8a7299;
-      margin-bottom: 18px;
-    }
-
-    .countdown-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    @media (min-width: 600px) {
-      .countdown-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    .time-box {
-      background: radial-gradient(circle at top, #ffe7f2, #ffffff);
-      padding: 12px;
-      border-radius: 18px;
-      text-align: center;
-    }
-
-    .time-number {
-      font-size: 1.9rem;
-      color: #e0548b;
-      font-weight: 600;
-    }
-
-    .time-label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      color: #8e6e9b;
-    }
-
-    .dua-line {
-      margin-top: 10px;
-      color: #7c6a8b;
-      font-size: 0.9rem;
-    }
+    .time-number{font-size:1.9rem;color:#e0548b;font-weight:600;}
+    .time-label{text-transform:uppercase;font-size:.72rem;color:#8e6e9b;}
+    .dua-line{margin-top:10px;color:#7c6a8b;font-size:.9rem;}
 
     /* Story */
-    .story-card {
-      padding: 18px;
-      background: linear-gradient(150deg, #fdfbff, #ffeef6);
-      border-radius: 22px;
-      box-shadow: 0 10px 24px rgba(176, 143, 214, 0.2);
+    .story-card{
+      background:linear-gradient(150deg,#fdfbff,#ffeef6);
+      padding:18px;border-radius:22px;box-shadow:0 10px 24px rgba(176,143,214,.2);
+    }
+    .story-title{font-family:"Playfair Display";margin-bottom:10px;}
+    .story-text{color:#6c5877;font-size:.9rem;line-height:1.6;margin-bottom:10px;}
+    .urdu-line{color:#7b648b;font-size:.86rem;}
+
+    /* Music button */
+    .music-btn{
+      margin-top:24px;
+      display:inline-block;
+      background:#ff8eb3;
+      color:white;
+      padding:10px 20px;
+      border:none;
+      border-radius:25px;
+      font-size:0.95rem;
+      cursor:pointer;
+      transition:0.2s;
+      box-shadow:0 4px 12px rgba(255,120,156,.3);
+    }
+    .music-btn:hover{
+      background:#ff6f9d;
+      transform:translateY(-2px);
     }
 
-    .story-title {
-      font-family: "Playfair Display", serif;
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-    }
-
-    .story-text {
-      color: #6c5877;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin-bottom: 10px;
-    }
-
-    .story-text em {
-      font-style: normal;
-      font-weight: 500;
-      color: #e0548b;
-    }
-
-    .urdu-line {
-      margin-top: 6px;
-      color: #7b648b;
-      font-size: 0.86rem;
-    }
-
-    #after-message {
-      display: none;
-      margin-top: 12px;
-      color: #5b476a;
-      text-align: center;
-      font-size: 0.95rem;
-    }
-
-    /* Music / Audio section */
-    .audio-section {
-      margin-top: 24px;
-      padding: 14px 16px 12px;
-      border-radius: 18px;
-      background: linear-gradient(130deg, #fff8fb, #f4f2ff);
-      box-shadow: 0 6px 16px rgba(190, 160, 220, 0.18);
-    }
-
-    .audio-title {
-      font-size: 0.95rem;
-      margin-bottom: 6px;
-      color: #5c486b;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .audio-title span {
-      font-size: 1.1rem;
-    }
-
-    .audio-player {
-      width: 100%;
-      margin: 6px 0 2px;
-    }
-
-    .audio-hint {
-      font-size: 0.78rem;
-      color: #9986ac;
-    }
-
-    .audio-hint code {
-      font-family: "Courier New", monospace;
-      font-size: 0.76rem;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 1px 4px;
-      border-radius: 4px;
-    }
-
-    .footer-note {
-      margin-top: 18px;
-      text-align: center;
-      font-size: 0.78rem;
-      color: #aa94b8;
-    }
+    /* Footer */
+    .footer-note{text-align:center;margin-top:18px;color:#aa94b8;font-size:.78rem;}
   </style>
 </head>
 
 <body>
-  <!-- Floating hearts (created by JS) -->
-  <div class="floating-hearts" aria-hidden="true"></div>
+  <div class="floating-hearts"></div>
 
   <div class="container">
+
+    <!-- HEADER -->
     <header>
       <div class="header-tagline">Bismillah · With Love & Duas</div>
-
       <div class="names-line">
         <span>Soheil</span>
         <span class="and-heart">♥</span>
         <span>Wafiya</span>
       </div>
-
       <p class="nikah-line">
         InshaAllah, on this day, two hearts, two families, and two duaas become one journey. 🤍
       </p>
@@ -379,9 +158,10 @@
       </div>
     </header>
 
+    <!-- MAIN -->
     <main class="content">
 
-      <!-- Countdown Card -->
+      <!-- COUNTDOWN -->
       <section class="countdown-card">
         <h2 class="countdown-title">Counting down to forever</h2>
 
@@ -391,25 +171,10 @@
 
         <div id="countdown-wrapper">
           <div class="countdown-grid">
-            <div class="time-box">
-              <div id="days" class="time-number">0</div>
-              <div class="time-label">Days</div>
-            </div>
-
-            <div class="time-box">
-              <div id="hours" class="time-number">0</div>
-              <div class="time-label">Hours</div>
-            </div>
-
-            <div class="time-box">
-              <div id="minutes" class="time-number">0</div>
-              <div class="time-label">Minutes</div>
-            </div>
-
-            <div class="time-box">
-              <div id="seconds" class="time-number">0</div>
-              <div class="time-label">Seconds</div>
-            </div>
+            <div class="time-box"><div id="days" class="time-number">0</div><div class="time-label">Days</div></div>
+            <div class="time-box"><div id="hours" class="time-number">0</div><div class="time-label">Hours</div></div>
+            <div class="time-box"><div id="minutes" class="time-number">0</div><div class="time-label">Minutes</div></div>
+            <div class="time-box"><div id="seconds" class="time-number">0</div><div class="time-label">Seconds</div></div>
           </div>
 
           <p class="dua-line">
@@ -417,12 +182,12 @@
           </p>
         </div>
 
-        <p id="after-message">
+        <p id="after-message" style="display:none;">
           Nikah Mubarak, Soheil &amp; Wafiya! Today is the day your duaas turn into a shared forever. 🤍
         </p>
       </section>
 
-      <!-- Story / Love Note -->
+      <!-- STORY -->
       <section class="story-card">
         <h3 class="story-title">A little love note…</h3>
 
@@ -432,94 +197,95 @@
         </p>
 
         <p class="story-text">
-          This countdown isn’t just numbers on a screen.  
-          It’s every heartbeat, every smile,  
+          This countdown isn’t just numbers on a screen.
+          It’s every heartbeat, every smile,
           and every “Alhamdulillah” for the blessing of finding your person.
         </p>
 
         <p class="urdu-line">
-          <strong>Roman Urdu:</strong>  
+          <strong>Roman Urdu:</strong><br>
           “Tum meri duaa ka woh hissa ho jo kabhi ‘Aameen’ ke bina na chuti.”
         </p>
       </section>
 
     </main>
 
-    <!-- Music / Audio Section -->
-    <section class="audio-section">
-      <p class="audio-title">
-        <span>🎵</span> Background Music (press play &amp; enjoy)
-      </p>
+    <!-- MUSIC BUTTON -->
+    <button class="music-btn" id="musicBtn">Play Music 🎵</button>
 
-      <audio class="audio-player" controls loop>
-        <!-- Replace "music.mp3" with your own file name or a direct MP3 link -->
-        <source src="music.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
+    <audio id="bgMusic" loop>
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
-      <p class="audio-hint">
-        Tip: Upload your file as <code>music.mp3</code> in the same repo, or use a direct MP3 link.
-      </p>
-    </section>
-
+    <!-- FOOTER -->
     <p class="footer-note">
       Handcrafted with ❤ by Soheil, for his better half.
     </p>
   </div>
 
   <script>
-    // Countdown: 24 Dec 2025 at 21:00 (9 PM)
+    /* Countdown */
     const weddingDate = new Date("December 24, 2025 21:00:00").getTime();
-
     const daysEl = document.getElementById("days");
     const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
     const secondsEl = document.getElementById("seconds");
-    const countdownWrapper = document.getElementById("countdown-wrapper");
     const afterMessage = document.getElementById("after-message");
+    const wrapper = document.getElementById("countdown-wrapper");
 
-    function updateCountdown() {
+    function updateCountdown(){
       const now = new Date().getTime();
       const diff = weddingDate - now;
 
-      if (diff <= 0) {
-        countdownWrapper.style.display = "none";
+      if(diff <= 0){
+        wrapper.style.display = "none";
         afterMessage.style.display = "block";
-        clearInterval(timer);
         return;
       }
 
-      const secondsTotal = Math.floor(diff / 1000);
-      const minutesTotal = Math.floor(secondsTotal / 60);
-      const hoursTotal = Math.floor(minutesTotal / 60);
-      const days = Math.floor(hoursTotal / 24);
+      const s = Math.floor(diff/1000);
+      const m = Math.floor(s/60);
+      const h = Math.floor(m/60);
+      const d = Math.floor(h/24);
 
-      const displayHours = hoursTotal % 24;
-      const displayMinutes = minutesTotal % 60;
-      const displaySeconds = secondsTotal % 60;
-
-      daysEl.textContent = days;
-      hoursEl.textContent = String(displayHours).padStart(2, "0");
-      minutesEl.textContent = String(displayMinutes).padStart(2, "0");
-      secondsEl.textContent = String(displaySeconds).padStart(2, "0");
+      daysEl.textContent = d;
+      hoursEl.textContent = String(h%24).padStart(2,"0");
+      minutesEl.textContent = String(m%60).padStart(2,"0");
+      secondsEl.textContent = String(s%60).padStart(2,"0");
     }
+    setInterval(updateCountdown,1000); updateCountdown();
 
-    updateCountdown();
-    const timer = setInterval(updateCountdown, 1000);
+    /* Floating hearts */
+    const hearts = document.querySelector(".floating-hearts");
+    function createHeart(){
+      const h = document.createElement("span");
+      h.textContent = "❤";
+      h.style.left = Math.random()*100 + "%";
+      h.style.fontSize = (1 + Math.random()*1.2) + "rem";
+      h.style.setProperty("--x-move", ((Math.random()*80)-40) + "px");
+      h.style.animationDuration = (8+Math.random()*6)+"s";
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(),15000);
+    }
+    setInterval(createHeart,700);
 
-    // Floating hearts logic
-    const heartsContainer = document.querySelector(".floating-hearts");
+    /* Music button */
+    const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("musicBtn");
+    let isPlaying = false;
 
-    function createHeart() {
-      const heart = document.createElement("span");
-      heart.textContent = "❤";
+    btn.onclick = () => {
+      if(!isPlaying){
+        music.play();
+        btn.textContent = "Pause Music ⏸️";
+        isPlaying = true;
+      } else {
+        music.pause();
+        btn.textContent = "Play Music 🎵";
+        isPlaying = false;
+      }
+    };
+  </script>
 
-      const size = 0.9 + Math.random() * 1.2;
-      heart.style.fontSize = size + "rem";
-
-      const left = Math.random() * 100;
-      heart.style.left = left + "%";
-
-      const xMove = (Math.random() * 80) - 40;
-      heart.style.setProperty("--x-move", x
-
+</body>
+</html>
