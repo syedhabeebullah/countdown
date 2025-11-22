@@ -37,7 +37,7 @@
       filter: blur(40px);
       opacity: 0.6;
       z-index: 0;
-      animation: float 18s ease-in-out infinite alternate;
+      animation: floatBg 18s ease-in-out infinite alternate;
     }
 
     body::before {
@@ -57,9 +57,42 @@
       animation-delay: 3s;
     }
 
-    @keyframes float {
+    @keyframes floatBg {
       from { transform: translate3d(0, 0, 0); }
       to   { transform: translate3d(25px, -30px, 0); }
+    }
+
+    /* Floating hearts overlay */
+    .floating-hearts {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .floating-hearts span {
+      position: absolute;
+      bottom: -40px;
+      font-size: 1.4rem;
+      color: rgba(255, 120, 156, 0.7);
+      animation-name: riseHeart;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes riseHeart {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.8);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(var(--x-move, 0px), -120vh, 0) scale(1.2);
+        opacity: 0;
+      }
     }
 
     .container {
@@ -252,6 +285,12 @@
       margin-bottom: 10px;
     }
 
+    .story-text em {
+      font-style: normal;
+      font-weight: 500;
+      color: #e0548b;
+    }
+
     .urdu-line {
       margin-top: 6px;
       color: #7b648b;
@@ -266,6 +305,46 @@
       font-size: 0.95rem;
     }
 
+    /* Music / Audio section */
+    .audio-section {
+      margin-top: 24px;
+      padding: 14px 16px 12px;
+      border-radius: 18px;
+      background: linear-gradient(130deg, #fff8fb, #f4f2ff);
+      box-shadow: 0 6px 16px rgba(190, 160, 220, 0.18);
+    }
+
+    .audio-title {
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: #5c486b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .audio-title span {
+      font-size: 1.1rem;
+    }
+
+    .audio-player {
+      width: 100%;
+      margin: 6px 0 2px;
+    }
+
+    .audio-hint {
+      font-size: 0.78rem;
+      color: #9986ac;
+    }
+
+    .audio-hint code {
+      font-family: "Courier New", monospace;
+      font-size: 0.76rem;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+
     .footer-note {
       margin-top: 18px;
       text-align: center;
@@ -276,6 +355,9 @@
 </head>
 
 <body>
+  <!-- Floating hearts (created by JS) -->
+  <div class="floating-hearts" aria-hidden="true"></div>
+
   <div class="container">
     <header>
       <div class="header-tagline">Bismillah · With Love & Duas</div>
@@ -293,12 +375,13 @@
       <div class="date-pill">
         <span>Nikah Day</span>
         <div class="date-pill-dot"></div>
-        <span>24 December 2025</span>
+        <span>24 December 2025 · 9:00 PM</span>
       </div>
     </header>
 
     <main class="content">
 
+      <!-- Countdown Card -->
       <section class="countdown-card">
         <h2 class="countdown-title">Counting down to forever</h2>
 
@@ -339,6 +422,7 @@
         </p>
       </section>
 
+      <!-- Story / Love Note -->
       <section class="story-card">
         <h3 class="story-title">A little love note…</h3>
 
@@ -361,8 +445,25 @@
 
     </main>
 
+    <!-- Music / Audio Section -->
+    <section class="audio-section">
+      <p class="audio-title">
+        <span>🎵</span> Background Music (press play &amp; enjoy)
+      </p>
+
+      <audio class="audio-player" controls loop>
+        <!-- Replace "music.mp3" with your own file name or a direct MP3 link -->
+        <source src="music.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+
+      <p class="audio-hint">
+        Tip: Upload your file as <code>music.mp3</code> in the same repo, or use a direct MP3 link.
+      </p>
+    </section>
+
     <p class="footer-note">
-      Handcrafted with ❤ by Soheil, for her better half
+      Handcrafted with ❤ by Soheil, for his better half.
     </p>
   </div>
 
@@ -405,6 +506,20 @@
 
     updateCountdown();
     const timer = setInterval(updateCountdown, 1000);
-  </script>
-</body>
-</html>
+
+    // Floating hearts logic
+    const heartsContainer = document.querySelector(".floating-hearts");
+
+    function createHeart() {
+      const heart = document.createElement("span");
+      heart.textContent = "❤";
+
+      const size = 0.9 + Math.random() * 1.2;
+      heart.style.fontSize = size + "rem";
+
+      const left = Math.random() * 100;
+      heart.style.left = left + "%";
+
+      const xMove = (Math.random() * 80) - 40;
+      heart.style.setProperty("--x-move", x
+
