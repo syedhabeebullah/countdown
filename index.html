@@ -79,13 +79,12 @@
     }
 
     header{text-align:center;}
-
     .header-tagline{
-      font-size:.78rem;
-      color:#b19ac1;
-      margin-bottom:8px;
-      letter-spacing:0.2em;
       text-transform:uppercase;
+      font-size:.78rem;
+      letter-spacing:.22em;
+      color:#b19ac1;
+      margin-bottom:6px;
     }
 
     .names-line{
@@ -111,9 +110,8 @@
 
     .nikah-line{
       color:#7b6a8e;
-      margin-top:10px;
+      margin-top:8px;
       font-size:.94rem;
-      font-weight:400;
     }
 
     .date-pill{
@@ -136,7 +134,7 @@
       background:#ff95b5;
     }
 
-    /* Layout */
+    /* Content layout */
     .content{
       display:grid;
       gap:24px;
@@ -163,7 +161,6 @@
       color:#8a7299;
       margin-bottom:18px;
       font-size:.9rem;
-      line-height:1.5;
     }
 
     .countdown-grid{
@@ -218,7 +215,6 @@
     .urdu-line{
       color:#7b648b;
       font-size:.86rem;
-      margin-top:8px;
     }
 
     .footer-note{
@@ -231,31 +227,49 @@
     /* Hidden audio */
     #bgMusic{ display:none; }
 
-    /* Tiny fallback button */
-    .music-fallback-btn{
-      position:fixed;
-      right:14px;
-      bottom:14px;
-      z-index:3;
-      background:#ff8eb3;
-      color:#fff;
-      border:none;
-      border-radius:999px;
-      padding:8px 12px;
-      font-size:0.8rem;
-      box-shadow:0 4px 10px rgba(0,0,0,.25);
-      cursor:pointer;
-      display:none;
-    }
-
-    /* Mobile optimization */
-    @media(max-width:600px){
-      body{padding:10px;align-items:flex-start;}
-      .container{margin-top:10px;padding:20px;}
-      .names-line{font-size:2.4rem;}
-      .countdown-card,.story-card{padding:14px;}
-      .story-text,.urdu-line,.dua-line{font-size:.82rem;}
-      .footer-note{font-size:.72rem;}
+    /* 📱 Mobile tweaks */
+    @media (max-width: 600px) {
+      body{
+        padding:10px;
+        align-items:flex-start;
+      }
+      .container{
+        margin-top:16px;
+        padding:22px 14px 26px;
+        border-radius:22px;
+        box-shadow:0 14px 26px rgba(0,0,0,0.10);
+      }
+      .header-tagline{
+        font-size:0.7rem;
+        letter-spacing:0.18em;
+      }
+      .names-line{
+        font-size:2.4rem;
+        gap:6px;
+      }
+      .nikah-line{
+        font-size:0.85rem;
+      }
+      .date-pill{
+        font-size:0.8rem;
+        padding:6px 12px;
+      }
+      .countdown-card,
+      .story-card{
+        padding:14px 12px;
+      }
+      .time-number{
+        font-size:1.6rem;
+      }
+      .countdown-subtitle,
+      .dua-line,
+      .story-text,
+      .urdu-line{
+        font-size:0.82rem;
+      }
+      .footer-note{
+        font-size:0.72rem;
+      }
     }
   </style>
 </head>
@@ -263,14 +277,11 @@
 <body>
   <div class="floating-hearts"></div>
 
-  <!-- Tiny fallback music button -->
-  <button class="music-fallback-btn" id="musicFallback">Tap for music 🎵</button>
-
   <div class="container">
 
     <!-- HEADER -->
     <header>
-      <div class="header-tagline">Bismillah • Allah brought you into my life exactly when I needed you 🤍</div>
+      <div class="header-tagline">Bismillah · With Love & Duas</div>
 
       <div class="names-line">
         <span>Soheil</span>
@@ -297,8 +308,7 @@
         <h2 class="countdown-title">Counting down to forever</h2>
 
         <p class="countdown-subtitle">
-          Every passing second brings Soheil closer to the moment he looks at Wafiya and says,  
-          “You’re my forever.”
+          Every second brings Soheil a little closer to saying “Qubool hai” to his beloved, Wafiya.
         </p>
 
         <div id="countdown-wrapper">
@@ -322,32 +332,33 @@
           </div>
 
           <p class="dua-line">
-            Ya Allah, bless this new home of Soheil &amp; Wafiya with sakoon, mercy, and endless love. آمین
+            Ya Allah, fill this new home of Soheil &amp; Wafiya with sakoon, mercy, and endless love. آمین
           </p>
         </div>
 
         <p id="after-message" style="display:none;">
-          Nikah Mubarak, Soheil &amp; Wafiya! Today is the day your duaas turn into a forever. 🤍
+          Nikah Mubarak, Soheil &amp; Wafiya! Today is the day your duaas turn into a shared forever. 🤍
         </p>
       </section>
 
       <!-- STORY -->
       <section class="story-card">
-        <h3 class="story-title">A message from Soheil…</h3>
+        <h3 class="story-title">A little love note…</h3>
 
         <p class="story-text">
-          Wafiya, you came into my life like a quiet blessing — soft, gentle, and exactly when my heart needed you.
+          Somewhere between duas whispered at tahajjud and quiet wishes in the heart,
+          <em>Soheil found his forever in Wafiya</em>.
         </p>
 
         <p class="story-text">
-          Every moment with you feels like a dua being answered.  
-          You’re not just someone I love…  
-          You’re my peace, my comfort, and the home my soul always longed for.
+          This countdown isn’t just numbers on a screen.
+          It’s every heartbeat, every smile,
+          and every “Alhamdulillah” for the blessing of finding your person.
         </p>
 
         <p class="urdu-line">
           <strong>Roman Urdu:</strong><br>
-          “Tum woh dua ho jo maine dil se maangi… aur Allah ne muskurahat ke saath qubool karli.”
+          “Tum meri duaa ka woh hissa ho jo kabhi ‘Aameen’ ke bina na chuti.”
         </p>
       </section>
 
@@ -411,24 +422,17 @@
     }
     setInterval(makeHeart, 700);
 
-    /* Auto music play with fallback button */
+    /* Auto music play - strong version */
     const music = document.getElementById("bgMusic");
-    const musicBtn = document.getElementById("musicFallback");
 
     window.addEventListener("load", () => {
+      music.volume = 1.0;
       music.muted = true;
       music.play().then(() => {
         setTimeout(() => { music.muted = false; }, 300);
       }).catch(() => {
-        music.muted = false;
-        musicBtn.style.display = "inline-flex";
+        // iOS may still block autoplay; nothing else to show
       });
-    });
-
-    musicBtn.addEventListener("click", () => {
-      music.play().then(() => {
-        musicBtn.style.display = "none";
-      }).catch(() => {});
     });
   </script>
 
