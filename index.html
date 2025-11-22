@@ -307,7 +307,7 @@
   <div class="floating-hearts"></div>
 
   <!-- Top-right music toggle button -->
-  <button id="musicToggle" class="music-btn">🎵</button>
+  <button id="musicToggle" class="music-btn paused">🎵</button>
 
   <div class="container">
 
@@ -397,7 +397,7 @@
     </main>
 
     <!-- HIDDEN MUSIC -->
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop preload="auto">
       <source src="music.mp3" type="audio/mpeg">
     </audio>
 
@@ -454,35 +454,18 @@
     }
     setInterval(makeHeart, 700);
 
-    /* Music logic */
+    /* Music logic - click only (most reliable) */
     const music = document.getElementById("bgMusic");
     const toggleBtn = document.getElementById("musicToggle");
 
-    // Try autoplay on load (muted trick)
-    window.addEventListener("load", () => {
-      music.volume = 1.0;
-      music.muted = true;
-      music.play().then(() => {
-        setTimeout(() => { 
-          music.muted = false; 
-          toggleBtn.classList.remove("paused");
-          toggleBtn.textContent = "🎵";
-        }, 300);
-      }).catch(() => {
-        // Autoplay blocked; user can press button
-        music.muted = false;
-        toggleBtn.classList.add("paused");
-        toggleBtn.textContent = "🎵";
-      });
-    });
-
-    // Play / pause on button click
     toggleBtn.addEventListener("click", () => {
       if (music.paused){
         music.play().then(() => {
           toggleBtn.classList.remove("paused");
           toggleBtn.textContent = "🎵";
-        }).catch(() => {});
+        }).catch((err) => {
+          console.log("Play failed:", err);
+        });
       } else {
         music.pause();
         toggleBtn.classList.add("paused");
