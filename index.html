@@ -19,8 +19,8 @@
       justify-content:center;
       padding:20px;
       background:radial-gradient(circle at top,#ffe6f2,#fef6ff 35%,#e3f2ff 70%,#f8fff9);
-      overflow:hidden;
       position:relative;
+      /* 👇 removed overflow:hidden so mobile can scroll */
     }
 
     /* Background glow */
@@ -228,12 +228,35 @@
     /* Hidden audio */
     #bgMusic{ display:none; }
 
+    /* Tiny fallback music button (only shown if autoplay blocked) */
+    .music-fallback-btn{
+      position:fixed;
+      right:14px;
+      bottom:14px;
+      z-index:3;
+      background:#ff8eb3;
+      color:#fff;
+      border:none;
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:0.8rem;
+      box-shadow:0 4px 10px rgba(0,0,0,.25);
+      cursor:pointer;
+      display:none; /* default hidden */
+    }
+    .music-fallback-btn:hover{
+      background:#ff6f9d;
+      transform:translateY(-1px);
+    }
+
     /* 📱 Mobile tweaks */
     @media (max-width: 600px) {
       body{
         padding:10px;
+        align-items:flex-start; /* not too aggressively centered on small screens */
       }
       .container{
+        margin-top:16px;
         padding:22px 14px 26px;
         border-radius:22px;
         box-shadow:0 14px 26px rgba(0,0,0,0.10);
@@ -279,6 +302,9 @@
 
 <body>
   <div class="floating-hearts"></div>
+
+  <!-- Tiny fallback button for music (only shows if autoplay is blocked) -->
+  <button class="music-fallback-btn" id="musicFallback">Tap for music 🎵</button>
 
   <div class="container">
 
@@ -425,17 +451,26 @@
     }
     setInterval(makeHeart, 700);
 
-    /* Auto music play (muted trick – still depends on browser) */
+    /* Auto music play with fallback button */
     const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicFallback");
+
     window.addEventListener("load", () => {
       music.muted = true;
       music.play().then(() => {
-        setTimeout(() => {
-          music.muted = false;
-        }, 300);
+        // Autoplay worked, unmute shortly
+        setTimeout(() => { music.muted = false; }, 300);
       }).catch(() => {
-        // Some browsers may still block autoplay; nothing breaks if they do.
+        // Autoplay blocked, show tiny button
+        music.muted = false;
+        musicBtn.style.display = "inline-flex";
       });
+    });
+
+    musicBtn.addEventListener("click", () => {
+      music.play().then(() => {
+        musicBtn.style.display = "none";
+      }).catch(() => {});
     });
   </script>
 
