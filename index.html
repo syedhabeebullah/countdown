@@ -28,7 +28,7 @@
       position: relative;
     }
 
-    /* Floating soft circles in background */
+    /* Floating background circles */
     body::before,
     body::after {
       content: "";
@@ -58,12 +58,8 @@
     }
 
     @keyframes float {
-      from {
-        transform: translate3d(0, 0, 0);
-      }
-      to {
-        transform: translate3d(25px, -30px, 0);
-      }
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(25px, -30px, 0); }
     }
 
     .container {
@@ -74,26 +70,22 @@
       background: rgba(255, 255, 255, 0.9);
       border-radius: 28px;
       padding: 32px 22px 36px;
-      box-shadow:
-        0 22px 40px rgba(0, 0, 0, 0.12),
-        0 0 0 1px rgba(255, 255, 255, 0.8);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.12);
       backdrop-filter: blur(16px);
       overflow: hidden;
     }
 
-    /* Subtle border glow */
     .container::before {
       content: "";
       position: absolute;
       inset: 0;
       border-radius: inherit;
       border: 1px solid rgba(255, 182, 193, 0.6);
-      pointer-events: none;
       mix-blend-mode: screen;
+      pointer-events: none;
     }
 
     header {
-      position: relative;
       padding-bottom: 18px;
       margin-bottom: 18px;
     }
@@ -109,7 +101,7 @@
 
     .names-line {
       font-family: "Great Vibes", cursive;
-      font-size: 3rem;
+      font-size: 3.2rem;
       text-align: center;
       color: #e2578c;
       display: flex;
@@ -119,14 +111,9 @@
       flex-wrap: wrap;
     }
 
-    .names-line span {
-      white-space: nowrap;
-    }
-
     .and-heart {
       font-size: 1.7rem;
       color: #ff769c;
-      transform-origin: center;
       animation: pulseHeart 1.8s ease-in-out infinite;
     }
 
@@ -137,27 +124,23 @@
     }
 
     .nikah-line {
-      margin-top: 8px;
       text-align: center;
-      font-size: 0.94rem;
       color: #7b6a8e;
+      font-size: 0.94rem;
+      margin-top: 8px;
     }
 
     .date-pill {
       display: inline-flex;
-      align-items: center;
       justify-content: center;
-      margin: 18px auto 0;
+      align-items: center;
+      gap: 8px;
       padding: 8px 18px;
+      margin: 18px auto 0;
       background: linear-gradient(120deg, #ffe1eb, #ffe6ff);
       border-radius: 999px;
       font-size: 0.9rem;
       color: #795474;
-      gap: 8px;
-    }
-
-    .date-pill span {
-      font-weight: 500;
     }
 
     .date-pill-dot {
@@ -167,50 +150,35 @@
       background: #ff95b5;
     }
 
-    /* Main layout */
     .content {
       display: grid;
       gap: 24px;
     }
 
     @media (min-width: 768px) {
-      .container {
-        padding: 34px 36px 40px;
-      }
-
-      .names-line {
-        font-size: 3.4rem;
-      }
-
       .content {
         grid-template-columns: 1.3fr 1fr;
-        align-items: center;
       }
     }
 
-    /* Countdown section */
+    /* Countdown Card */
     .countdown-card {
-      padding: 20px 18px;
-      border-radius: 22px;
+      padding: 20px;
       background: linear-gradient(150deg, #ffffff, #fff4fa);
-      box-shadow:
-        0 10px 26px rgba(255, 143, 178, 0.18),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+      border-radius: 22px;
+      box-shadow: 0 10px 26px rgba(255, 143, 178, 0.18);
       position: relative;
-      overflow: hidden;
     }
 
     .countdown-card::before {
       content: "24·12·25";
       position: absolute;
-      right: -4px;
       bottom: -10px;
-      font-family: "Playfair Display", serif;
+      right: -4px;
       font-size: 3.1rem;
+      font-family: "Playfair Display", serif;
       color: rgba(255, 199, 220, 0.28);
-      letter-spacing: 0.2em;
       transform: rotate(-12deg);
-      pointer-events: none;
     }
 
     .countdown-title {
@@ -228,109 +196,74 @@
 
     .countdown-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      margin-bottom: 10px;
     }
 
     @media (min-width: 600px) {
       .countdown-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(4, 1fr);
       }
     }
 
     .time-box {
       background: radial-gradient(circle at top, #ffe7f2, #ffffff);
+      padding: 12px;
       border-radius: 18px;
-      padding: 11px 8px 12px;
-      box-shadow:
-        0 8px 18px rgba(234, 120, 162, 0.16),
-        0 0 0 1px rgba(255, 255, 255, 0.9);
       text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .time-box:hover {
-      transform: translateY(-2px);
-      box-shadow:
-        0 14px 26px rgba(234, 120, 162, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 1);
     }
 
     .time-number {
       font-size: 1.9rem;
-      font-weight: 600;
       color: #e0548b;
-      margin-bottom: 4px;
+      font-weight: 600;
     }
 
     .time-label {
       font-size: 0.72rem;
-      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: #8e6e9b;
     }
 
     .dua-line {
       margin-top: 10px;
-      font-size: 0.9rem;
       color: #7c6a8b;
+      font-size: 0.9rem;
     }
 
-    /* Romantic text side */
+    /* Story */
     .story-card {
-      padding: 18px 16px 18px;
-      border-radius: 22px;
+      padding: 18px;
       background: linear-gradient(150deg, #fdfbff, #ffeef6);
-      box-shadow:
-        0 10px 24px rgba(176, 143, 214, 0.2),
-        0 0 0 1px rgba(255, 255, 255, 0.9);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .story-card::before {
-      content: "❤";
-      position: absolute;
-      left: -12px;
-      top: -18px;
-      font-size: 3.5rem;
-      color: rgba(255, 180, 204, 0.25);
-      transform: rotate(-15deg);
+      border-radius: 22px;
+      box-shadow: 0 10px 24px rgba(176, 143, 214, 0.2);
     }
 
     .story-title {
       font-family: "Playfair Display", serif;
       font-size: 1.05rem;
       margin-bottom: 10px;
-      color: #4c3754;
     }
 
     .story-text {
+      color: #6c5877;
       font-size: 0.9rem;
       line-height: 1.6;
-      color: #6c5877;
       margin-bottom: 10px;
     }
 
-    .story-text em {
-      font-style: normal;
-      font-weight: 500;
-      color: #e0548b;
-    }
-
     .urdu-line {
-      font-size: 0.86rem;
       margin-top: 6px;
       color: #7b648b;
+      font-size: 0.86rem;
     }
 
-    /* After countdown message */
     #after-message {
+      display: none;
       margin-top: 12px;
-      font-size: 0.95rem;
       color: #5b476a;
       text-align: center;
+      font-size: 0.95rem;
     }
 
     .footer-note {
@@ -339,16 +272,13 @@
       font-size: 0.78rem;
       color: #aa94b8;
     }
-
-    .footer-note span {
-      color: #e0548b;
-    }
   </style>
 </head>
+
 <body>
   <div class="container">
     <header>
-      <div class="header-tagline">Bismillah · With Love &amp; Duas</div>
+      <div class="header-tagline">Bismillah · With Love & Duas</div>
 
       <div class="names-line">
         <span>Soheil</span>
@@ -361,16 +291,17 @@
       </p>
 
       <div class="date-pill">
-        <span>NiKah Day</span>
+        <span>Nikah Day</span>
         <div class="date-pill-dot"></div>
         <span>24 December 2025</span>
       </div>
     </header>
 
     <main class="content">
-      <!-- Countdown Section -->
+
       <section class="countdown-card">
         <h2 class="countdown-title">Counting down to forever</h2>
+
         <p class="countdown-subtitle">
           Every second brings Soheil a little closer to saying “Qubool hai” to his beloved, Wafiya.
         </p>
@@ -381,14 +312,17 @@
               <div id="days" class="time-number">0</div>
               <div class="time-label">Days</div>
             </div>
+
             <div class="time-box">
               <div id="hours" class="time-number">0</div>
               <div class="time-label">Hours</div>
             </div>
+
             <div class="time-box">
               <div id="minutes" class="time-number">0</div>
               <div class="time-label">Minutes</div>
             </div>
+
             <div class="time-box">
               <div id="seconds" class="time-number">0</div>
               <div class="time-label">Seconds</div>
@@ -396,56 +330,58 @@
           </div>
 
           <p class="dua-line">
-            Ya Allah, fill this new home of Soheil &amp; Wafiya with <em>sakoon</em>, mercy, and endless love. آمین
+            Ya Allah, fill this new home of Soheil &amp; Wafiya with sakoon, mercy, and endless love. آمین
           </p>
         </div>
 
-        <p id="after-message" style="display:none;">
+        <p id="after-message">
           Nikah Mubarak, Soheil &amp; Wafiya! Today is the day your duaas turn into a shared forever. 🤍
         </p>
       </section>
 
-      <!-- Romantic Story / Note Section -->
       <section class="story-card">
         <h3 class="story-title">A little love note…</h3>
+
         <p class="story-text">
           Somewhere between duas whispered at tahajjud and quiet wishes in the heart,
           <em>Soheil found his forever in Wafiya</em>.
         </p>
+
         <p class="story-text">
-          This countdown isn’t just numbers on a screen. It’s every heartbeat, every smile,
+          This countdown isn’t just numbers on a screen.  
+          It’s every heartbeat, every smile,  
           and every “Alhamdulillah” for the blessing of finding your person.
         </p>
+
         <p class="urdu-line">
           <strong>Roman Urdu:</strong>  
-          “Tum meri duaa ka woh hissa ho jo kabhi ‘Aameen’ ke bina adhoora nahin raha.”
+          “Tum meri duaa ka woh hissa ho jo kabhi ‘Aameen’ ke bina na chuti.”
         </p>
       </section>
+
     </main>
 
     <p class="footer-note">
-      Handcrafted with <span>❤</span> by Soheil, for his future wife, Wafiya.
+      Handcrafted with ❤ by Soheil, for her better half
     </p>
   </div>
 
   <script>
-    // ✏️ Change the wedding date here if needed
-    // Format: "Month Day, Year HH:MM:SS"
-    const weddingDate = new Date("December 24, 2025 00:00:00").getTime();
+    // Countdown: 24 Dec 2025 at 21:00 (9 PM)
+    const weddingDate = new Date("December 24, 2025 21:00:00").getTime();
 
-    const daysEl    = document.getElementById("days");
-    const hoursEl   = document.getElementById("hours");
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
     const minutesEl = document.getElementById("minutes");
     const secondsEl = document.getElementById("seconds");
     const countdownWrapper = document.getElementById("countdown-wrapper");
-    const afterMessage     = document.getElementById("after-message");
+    const afterMessage = document.getElementById("after-message");
 
     function updateCountdown() {
       const now = new Date().getTime();
       const diff = weddingDate - now;
 
       if (diff <= 0) {
-        // If the big day has arrived or passed
         countdownWrapper.style.display = "none";
         afterMessage.style.display = "block";
         clearInterval(timer);
@@ -454,22 +390,20 @@
 
       const secondsTotal = Math.floor(diff / 1000);
       const minutesTotal = Math.floor(secondsTotal / 60);
-      const hoursTotal   = Math.floor(minutesTotal / 60);
-      const days         = Math.floor(hoursTotal / 24);
+      const hoursTotal = Math.floor(minutesTotal / 60);
+      const days = Math.floor(hoursTotal / 24);
 
-      const displayHours   = hoursTotal   % 24;
+      const displayHours = hoursTotal % 24;
       const displayMinutes = minutesTotal % 60;
       const displaySeconds = secondsTotal % 60;
 
-      daysEl.textContent    = days;
-      hoursEl.textContent   = String(displayHours).padStart(2, "0");
+      daysEl.textContent = days;
+      hoursEl.textContent = String(displayHours).padStart(2, "0");
       minutesEl.textContent = String(displayMinutes).padStart(2, "0");
       secondsEl.textContent = String(displaySeconds).padStart(2, "0");
     }
 
-    // Initial render
     updateCountdown();
-    // Update every second
     const timer = setInterval(updateCountdown, 1000);
   </script>
 </body>
