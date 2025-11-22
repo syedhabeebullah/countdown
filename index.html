@@ -210,11 +210,7 @@
       color:#6c5877;
       font-size:.9rem;
       line-height:1.6;
-      margin-bottom:10px;
-    }
-    .urdu-line{
-      color:#7b648b;
-      font-size:.86rem;
+      margin-bottom:4px;
     }
 
     .footer-note{
@@ -263,8 +259,7 @@
       }
       .countdown-subtitle,
       .dua-line,
-      .story-text,
-      .urdu-line{
+      .story-text{
         font-size:0.82rem;
       }
       .footer-note{
@@ -343,29 +338,17 @@
 
       <!-- STORY -->
       <section class="story-card">
-        <h3 class="story-title">A little love note…</h3>
+        <h3 class="story-title">🌸 A Blessed Beginning</h3>
 
         <p class="story-text">
-          Somewhere between duas whispered at tahajjud and quiet wishes in the heart,
-          <em>Soheil found his forever in Wafiya</em>.
-        </p>
-
-        <p class="story-text">
-          This countdown isn’t just numbers on a screen.
-          It’s every heartbeat, every smile,
-          and every “Alhamdulillah” for the blessing of finding your person.
-        </p>
-
-        <p class="urdu-line">
-          <strong>Roman Urdu:</strong><br>
-          “Tum meri duaa ka woh hissa ho jo kabhi ‘Aameen’ ke bina na chuti.”
+          May Allah write everlasting love between us.
         </p>
       </section>
 
     </main>
 
     <!-- HIDDEN MUSIC -->
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop autoplay muted playsinline>
       <source src="music.mp3" type="audio/mpeg">
     </audio>
 
@@ -422,16 +405,15 @@
     }
     setInterval(makeHeart, 700);
 
-    /* Auto music play - strong version */
+    /* Try to unmute after autoplay starts */
     const music = document.getElementById("bgMusic");
-
     window.addEventListener("load", () => {
-      music.volume = 1.0;
-      music.muted = true;
       music.play().then(() => {
+        // If autoplay worked, unmute shortly
         setTimeout(() => { music.muted = false; }, 300);
       }).catch(() => {
-        // iOS may still block autoplay; nothing else to show
+        // Some browsers (esp. iOS Safari) block autoplay completely.
+        // In that case, user must tap the page once to start audio.
       });
     });
   </script>
