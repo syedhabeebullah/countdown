@@ -65,6 +65,37 @@
       100%{transform:translate3d(var(--x,0px),-120vh,0) scale(1.2);opacity:0;}
     }
 
+    /* Rose petals */
+    .petals{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      overflow:hidden;
+    }
+    .petal{
+      position:absolute;
+      width:18px;
+      height:24px;
+      background:radial-gradient(circle at 30% 30%, #ffe5f0, #ff8eb3 60%, #e0487a);
+      border-radius:60% 40% 60% 40%;
+      opacity:0.8;
+      animation:fallPetal linear infinite;
+    }
+    @keyframes fallPetal{
+      0%{
+        transform:translate3d(0,-10vh,0) rotate(0deg);
+        opacity:0;
+      }
+      10%{
+        opacity:1;
+      }
+      100%{
+        transform:translate3d(var(--xShift, 40px),110vh,0) rotate(220deg);
+        opacity:0;
+      }
+    }
+
     /* Music Toggle Button (top-right) */
     .music-btn{
       position:fixed;
@@ -94,7 +125,7 @@
       color:#555;
     }
 
-    /* Container */
+    /* Container / Card */
     .container{
       position:relative;
       z-index:1;
@@ -246,6 +277,102 @@
       font-size:.86rem;
     }
 
+    /* Letter button */
+    .letter-btn{
+      margin-top:14px;
+      padding:8px 16px;
+      border-radius:999px;
+      border:none;
+      background:#ff8eb3;
+      color:#fff;
+      font-size:0.85rem;
+      cursor:pointer;
+      box-shadow:0 4px 10px rgba(0,0,0,0.18);
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:0.2s;
+    }
+    .letter-btn:hover{
+      background:#ff6f9d;
+      transform:translateY(-1px);
+    }
+
+    /* Letter modal */
+    .letter-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:10;
+      padding:20px;
+    }
+    .letter-content{
+      max-width:520px;
+      width:100%;
+      background:#fffafc;
+      border-radius:24px;
+      padding:22px 20px 20px;
+      box-shadow:0 18px 40px rgba(0,0,0,0.25);
+      position:relative;
+      border:1px solid #ffd5e5;
+    }
+    .letter-heading{
+      font-family:"Playfair Display";
+      font-size:1.2rem;
+      margin-bottom:10px;
+      color:#d44f7f;
+      text-align:center;
+    }
+    .letter-body{
+      font-size:0.9rem;
+      color:#6b5775;
+      line-height:1.6;
+      margin-bottom:6px;
+      white-space:pre-line;
+    }
+    .letter-sign{
+      margin-top:10px;
+      text-align:right;
+      font-size:0.9rem;
+      color:#8a6a98;
+    }
+    .letter-close{
+      position:absolute;
+      top:10px;
+      right:12px;
+      border:none;
+      background:transparent;
+      font-size:1.2rem;
+      cursor:pointer;
+      color:#b1819d;
+    }
+    .letter-close:hover{
+      color:#8c5a7c;
+    }
+
+    /* Printable extra letter (for print view) */
+    .print-letter{
+      display:none;
+      margin-top:20px;
+      padding-top:10px;
+      border-top:1px dashed #e3c5d8;
+    }
+    .print-letter-title{
+      font-family:"Playfair Display";
+      font-size:1.1rem;
+      margin-bottom:8px;
+      color:#c24a78;
+    }
+    .print-letter-body{
+      font-size:0.9rem;
+      color:#65516f;
+      line-height:1.6;
+      white-space:pre-line;
+    }
+
     .footer-note{
       text-align:center;
       margin-top:22px;
@@ -300,14 +427,71 @@
         font-size:0.72rem;
       }
     }
+
+    /* 🖨️ Printable wedding card styles */
+    @media print {
+      body{
+        background:#ffffff !important;
+        padding:0;
+        display:block;
+      }
+      body::before,
+      body::after,
+      .floating-hearts,
+      .petals,
+      .music-btn{
+        display:none !important;
+      }
+      .container{
+        max-width:700px;
+        margin:0 auto;
+        box-shadow:none;
+        border-radius:0;
+        padding:24px 26px 28px;
+        border:1px solid #e0d4e5;
+      }
+      .content{
+        display:block;
+      }
+      .countdown-card{
+        display:none; /* hide countdown on printed card */
+      }
+      .story-card{
+        margin-top:12px;
+      }
+      .print-letter{
+        display:block;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="floating-hearts"></div>
+  <div class="petals"></div>
 
   <!-- Top-right music toggle button -->
   <button id="musicToggle" class="music-btn paused">🎵</button>
+
+  <!-- Letter modal -->
+  <div class="letter-modal" id="letterModal">
+    <div class="letter-content">
+      <button class="letter-close" id="closeLetter" aria-label="Close letter">✕</button>
+      <h3 class="letter-heading">Letter to my bride 💌</h3>
+      <div class="letter-body" id="letterBody">
+        My dearest Wafiya,
+
+        From the day you came into my life, my duas started to feel different. They were no longer just about my future, they were about *our* future. Allah ne tumhein mere liye chun liya, and every time I think of that, my heart says Alhamdulillah a little louder.
+
+        When I look at this countdown, I'm not just waiting for a date… I'm waiting for the moment I get to say “Qubool hai” with you in front of Allah, our families, and all the duas that brought us here.
+
+        Tum meri duaa ka woh hissa ho jo kabhi ‘Aameen’ ke bina na chuti — and InshaAllah, from our Nikah day onwards, every Aameen will be shared.
+
+        With all my love, all my shukr,  
+      </div>
+      <div class="letter-sign">— Soheil</div>
+    </div>
+  </div>
 
   <div class="container">
 
@@ -389,12 +573,31 @@
         </p>
 
         <p class="urdu-line">
-          <strong>A Blessed Beginning </strong><br>
-          May Allah write everlasting love between us.
+          <strong>Roman Urdu:</strong><br>
+          “Tum meri duaa ka woh hissa ho jo kabhi ‘Aameen’ ke bina na chuti.”
         </p>
+
+        <button class="letter-btn" id="openLetter">💌 Letter to my bride</button>
       </section>
 
     </main>
+
+    <!-- PRINT-ONLY LETTER CONTENT -->
+    <section class="print-letter">
+      <h3 class="print-letter-title">Letter to my bride 💌</h3>
+      <div class="print-letter-body">
+My dearest Wafiya,
+
+From the day you came into my life, my duas started to feel different. They were no longer just about my future, they were about our future. Allah ne tumhein mere liye chun liya, and every time I think of that, my heart says Alhamdulillah a little louder.
+
+When I look at this date, I'm not just seeing a day on the calendar… I'm seeing the moment I get to say “Qubool hai” with you in front of Allah, our families, and all the duas that brought us here.
+
+Tum meri duaa ka woh hissa ho jo kabhi ‘Aameen’ ke bina na chuti — and InshaAllah, from our Nikah day onwards, every Aameen will be shared.
+
+With all my love, all my shukr,  
+— Soheil
+      </div>
+    </section>
 
     <!-- HIDDEN MUSIC -->
     <audio id="bgMusic" loop preload="auto">
@@ -452,9 +655,24 @@
       hearts.appendChild(h);
       setTimeout(() => h.remove(), 15000);
     }
-    setInterval(makeHeart, 700);
+    setInterval(makeHeart, 900);
 
-    /* Music logic - click only (most reliable) */
+    /* Rose petals */
+    const petalsContainer = document.querySelector(".petals");
+    function makePetal(){
+      const p = document.createElement("div");
+      p.className = "petal";
+      p.style.left = Math.random() * 100 + "%";
+      p.style.animationDuration = (9 + Math.random()*5) + "s";
+      p.style.animationDelay = (Math.random()*4) + "s";
+      p.style.setProperty("--xShift", ((Math.random()*80)-40) + "px");
+      petalsContainer.appendChild(p);
+      setTimeout(() => p.remove(), 16000);
+    }
+    for(let i=0;i<10;i++){ makePetal(); }
+    setInterval(makePetal, 1100);
+
+    /* Music logic - click only (reliable) */
     const music = document.getElementById("bgMusic");
     const toggleBtn = document.getElementById("musicToggle");
 
@@ -470,6 +688,31 @@
         music.pause();
         toggleBtn.classList.add("paused");
         toggleBtn.textContent = "⏸";
+      }
+    });
+
+    /* Letter modal logic */
+    const openLetter = document.getElementById("openLetter");
+    const letterModal = document.getElementById("letterModal");
+    const closeLetter = document.getElementById("closeLetter");
+
+    openLetter.addEventListener("click", () => {
+      letterModal.style.display = "flex";
+    });
+
+    closeLetter.addEventListener("click", () => {
+      letterModal.style.display = "none";
+    });
+
+    letterModal.addEventListener("click", (e) => {
+      if (e.target === letterModal){
+        letterModal.style.display = "none";
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape"){
+        letterModal.style.display = "none";
       }
     });
   </script>
