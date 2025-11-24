@@ -65,75 +65,6 @@
       100%{transform:translate3d(var(--x,0px),-120vh,0) scale(1.2);opacity:0;}
     }
 
-    /* Top hanging decor */
-    .top-hangings{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:90px;
-      display:flex;
-      justify-content:space-evenly;
-      align-items:flex-start;
-      pointer-events:none;
-      z-index:2;
-    }
-    .top-hangings span{
-      position:relative;
-      font-size:1.4rem;
-      animation:swing 3.5s ease-in-out infinite;
-      transform-origin:top center;
-    }
-    .top-hangings span::before{
-      content:"";
-      position:absolute;
-      top:-70px;
-      left:50%;
-      width:2px;
-      height:70px;
-      transform:translateX(-50%);
-      background:linear-gradient(to bottom,rgba(255,182,193,.2),rgba(255,182,193,.9));
-    }
-    .top-hangings span:nth-child(2){ animation-delay:0.4s; }
-    .top-hangings span:nth-child(3){ animation-delay:0.8s; }
-    .top-hangings span:nth-child(4){ animation-delay:1.2s; }
-    .top-hangings span:nth-child(5){ animation-delay:1.6s; }
-
-    @keyframes swing{
-      0%,100%{ transform:rotate(0deg); }
-      25%    { transform:rotate(3deg); }
-      50%    { transform:rotate(-3deg); }
-      75%    { transform:rotate(2deg); }
-    }
-
-    /* Flower frame around screen */
-    .flower-frame{
-      position:fixed;
-      inset:10px;
-      pointer-events:none;
-      z-index:2;
-    }
-    .flower-corner{
-      position:absolute;
-      font-size:1.9rem;
-      filter:drop-shadow(0 2px 4px rgba(0,0,0,.2));
-      opacity:0.9;
-    }
-    .flower-tl{ top:0; left:6px; transform:rotate(-10deg); }
-    .flower-tr{ top:0; right:6px; transform:rotate(12deg); }
-    .flower-bl{ bottom:0; left:6px; transform:rotate(8deg); }
-    .flower-br{ bottom:0; right:6px; transform:rotate(-12deg); }
-
-    .flower-side{
-      position:absolute;
-      font-size:1.2rem;
-      opacity:0.75;
-    }
-    .flower-left-1{ left:0; top:30%; }
-    .flower-left-2{ left:0; top:60%; }
-    .flower-right-1{ right:0; top:25%; }
-    .flower-right-2{ right:0; top:55%; }
-
     /* Music Toggle Button (top-right) */
     .music-btn{
       position:fixed;
@@ -169,7 +100,7 @@
       z-index:1;
       width:100%;
       max-width:960px;
-      background:rgba(255,255,255,.92);
+      background:rgba(255,255,255,.9);
       border-radius:28px;
       padding:32px 22px 36px;
       box-shadow:0 22px 40px rgba(0,0,0,.12);
@@ -375,28 +306,6 @@
 <body>
   <div class="floating-hearts"></div>
 
-  <!-- Top hanging floral decor -->
-  <div class="top-hangings" aria-hidden="true">
-    <span>🌸</span>
-    <span>💮</span>
-    <span>🌷</span>
-    <span>🌺</span>
-    <span>🌸</span>
-  </div>
-
-  <!-- Flower frame around edges -->
-  <div class="flower-frame" aria-hidden="true">
-    <div class="flower-corner flower-tl">🌸</div>
-    <div class="flower-corner flower-tr">🌺</div>
-    <div class="flower-corner flower-bl">💮</div>
-    <div class="flower-corner flower-br">🌷</div>
-
-    <div class="flower-side flower-left-1">🌸</div>
-    <div class="flower-side flower-left-2">🌺</div>
-    <div class="flower-side flower-right-1">🌷</div>
-    <div class="flower-side flower-right-2">💮</div>
-  </div>
-
   <!-- Top-right music toggle button -->
   <button id="musicToggle" class="music-btn paused">🎵</button>
 
@@ -480,8 +389,8 @@
         </p>
 
         <p class="urdu-line">
-          <strong>Roman Urdu:</strong><br>
-          “Tum meri duaa ka woh hissa ho jo kabhi ‘Aameen’ ke bina na chuti.”
+          <strong>A Blessed Beginning:</strong><br>
+          May Allah write everlasting love between us.
         </p>
       </section>
 
@@ -545,7 +454,7 @@
     }
     setInterval(makeHeart, 700);
 
-    /* Music logic - click only */
+    /* Music logic - click only (most reliable) */
     const music = document.getElementById("bgMusic");
     const toggleBtn = document.getElementById("musicToggle");
 
